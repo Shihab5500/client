@@ -198,110 +198,14 @@
 //                       <Link
 //                         to="/profile"
 //                         onClick={() => setOpen(false)}
-//                         className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800"
-//                       >
-//                         Profile
-//                       </Link>
-//                       <button
-//                         onClick={handleLogout}
-//                         className="btn btn-outline w-full mt-2"
-//                       >
-//                         Logout
-//                       </button>
-//                     </div>
-//                   </div>
-//                 )}
-//               </li>
-//             </>
-//           )}
-//         </ul>
-        
-//         {/* হ্যামবার্গার বাটন (শুধু ছোট স্ক্রিনে দেখাবে) */}
-//         <div className="md:hidden"> {/* <-- 'md:hidden' যোগ করা হয়েছে */}
-//           <button 
-//             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-//             className="text-slate-700 dark:text-slate-200 hover:text-emerald-600"
-//           >
-//             {isMobileMenuOpen ? (
-//               // 'X' আইকন (যখন মেনু খোলা)
-//               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-//                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-//               </svg>
-//             ) : (
-//               // 'Menu' আইকন (যখন মেনু বন্ধ)
-//               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-//                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-//               </svg>
-//             )}
-//           </button>
-//         </div>
-//       </nav>
-
-//       {/* মোবাইল মেনু ড্রপডাউন (শুধু ছোট স্ক্রিনে দেখাবে) */}
-//       <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
-//         <ul className="flex flex-col gap-1 text-sm p-4 border-t border-slate-200 dark:border-slate-800">
-//           <li>
-//             <NavLink to="/" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>
-//               Home
-//             </NavLink>
-//           </li>
-
-//           {!user && (
-//             <>
-//               <li><NavLink to="/issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Issues</NavLink></li>
-//               <li><NavLink to="/login" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Login</NavLink></li>
-//               <li><NavLink to="/register" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Register</NavLink></li>
-//             </>
-//           )}
-
-//           {user && (
-//             <>
-//               <li><NavLink to="/issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>All Issues</NavLink></li>
-//               <li><NavLink to="/add-issue" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Add Issues</NavLink></li>
-//               <li><NavLink to="/my-issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>My Issues</NavLink></li>
-//               <li><NavLink to="/my-contributions" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>My Contribution</NavLink></li>
-              
-//               <li className="border-t border-slate-200 dark:border-slate-800 pt-2 mt-2">
-//                 <NavLink 
-//                   to="/profile" 
-//                   className={getMobileLinkClass} 
-//                   onClick={() => setIsMobileMenuOpen(false)}
-//                 >
-//                   <div className="flex items-center gap-2">
-//                     <img
-//                       src={user.photoURL || `https://i.pravatar.cc/40?u=${user.email}`}
-//                       alt="avatar"
-//                       className="h-7 w-7 rounded-full border"
-//                     />
-//                     <span>Profile</span>
-//                   </div>
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <button
-//                   onClick={handleLogout} // এই ফাংশনটি মেনু বন্ধ করাসহ লগআউট করে
-//                   className="btn btn-outline w-full mt-2"
-//                 >
-//                   Logout
-//                 </button>
-//               </li>
-//             </>
-//           )}
-//         </ul>
-//       </div>
-//     </header>
-//   );
-// }
 
 
-
-// src/components/Navbar.jsx
 
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { toast } from '../utils/toast';
 import { useState, useEffect, useRef } from 'react';
-import ThemeToggle from './ThemeToggle'; // <-- ১. ইম্পোর্ট করা হয়েছে
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -321,7 +225,6 @@ export default function Navbar() {
     navigate('/');
   };
 
-  // Close dropdown if clicked outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
