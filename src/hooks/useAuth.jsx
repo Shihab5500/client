@@ -122,14 +122,14 @@ export function AuthProvider({ children }) {
         // no-op
       }
 
-      // যদি আগে redirect flow থেকে ফিরে আসে, সেটাও ধরো
+      
       try {
         const redirectCred = await getRedirectResult(auth);
         if (redirectCred?.user) {
           setUser(redirectCred.user);
         }
       } catch (_) {
-        // no-op; নিচে onAuthStateChanged ঠিকই ইউজার সেট করবে
+        
       }
 
       const unsub = onAuthStateChanged(auth, (u) => {
@@ -158,23 +158,22 @@ export function AuthProvider({ children }) {
     return cred.user;
   };
 
-  // Google login — popup চেষ্টা করবে; ব্যর্থ হলে redirect-এ ফfallback
+  // Google login — popup চেষ্টা করবে; ব্যর্থ হলে redirect-এ fallback
   const _loginWithGoogle = async () => {
     try {
       const cred = await signInWithPopup(auth, googleProvider);
       return cred.user;
     } catch (err) {
-      // COOP/COEP, popup-blocker, বা কিছু 400 কেসে redirect বেশি স্থিতিশীল
-      // এখানে err.code দেখে চাইলে নির্দিষ্ট কেস ফিল্টার করতে পারো
+      
       await signInWithRedirect(auth, googleProvider);
-      // redirect flow হলে এই ফাংশন থেকে ইউজার রিটার্ন হয় না — পেজ রিডাইরেক্ট হবে
+      
       return null;
     }
   };
 
   // naming compatibility
-  const loginWithGoogle = _loginWithGoogle; // পুরনো কোডে যেটা ছিল
-  const loginGoogle = _loginWithGoogle;     // Login.jsx এ যেটা লাগে
+  const loginWithGoogle = _loginWithGoogle;
+  const loginGoogle = _loginWithGoogle;     
 
   // Logout
   const logout = () => signOut(auth);
