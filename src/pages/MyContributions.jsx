@@ -1,74 +1,12 @@
-// import { Helmet } from 'react-helmet-async';
-// import PrivateRoute from '../components/PrivateRoute';
-// import { myContributions } from '../services/contributions';
-// import { useEffect, useState } from 'react';
-// import { toast } from '../utils/toast';
-// import jsPDF from 'jspdf';
-// import autoTable from 'jspdf-autotable';
-
-// function Inner(){
-//   const [rows, setRows] = useState([]);
-//   useEffect(()=>{ (async()=> setRows(await myContributions()))(); },[]);
-
-//   const download = () => {
-//     if (!rows.length) return toast('info','No contributions yet');
-//     const doc = new jsPDF();
-//     doc.setFontSize(16);
-//     doc.text('Clean City — Contribution Report', 14, 18);
-//     autoTable(doc, {
-//       startY: 24,
-//       head: [['Issue ID', 'Amount', 'Date']],
-//       body: rows.map(r=>[r.issueId, `৳ ${r.amount}`, new Date(r.date).toLocaleString()])
-//     });
-//     doc.save('my_contributions.pdf');
-//   };
-
-//   return (
-//     <div className="card">
-//       <div className="flex items-center justify-between mb-3">
-//         <h3 className="font-semibold text-lg">My Contributions</h3>
-//         <button className="btn btn-primary" onClick={download}>Download Report</button>
-//       </div>
-//       <div className="overflow-x-auto">
-//         <table className="w-full text-sm">
-//           <thead><tr className="text-left"><th className="p-2">Issue Title/ID</th><th className="p-2">Category</th><th className="p-2">Paid Amount</th><th className="p-2">Date</th></tr></thead>
-//           <tbody>
-//             {rows.map(r=> (
-//               <tr key={r._id} className="border-t border-slate-200 dark:border-slate-800">
-//                 <td className="p-2">{r.issueId}</td>
-//                 <td className="p-2">—</td>
-//                 <td className="p-2">৳ {r.amount}</td>
-//                 <td className="p-2">{new Date(r.date).toLocaleString()}</td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         </table>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default function MyContributions(){
-//   return (
-//     <>
-//       <Helmet><title>My Contributions — Clean City</title></Helmet>
-//       <PrivateRoute><Inner/></PrivateRoute>
-//     </>
-//   );
-// }
-
-
-
-// src/pages/MyContributions.jsx
 
 import { Helmet } from 'react-helmet-async';
 import PrivateRoute from '../components/PrivateRoute';
 import { myContributions } from '../services/contributions';
 import { useEffect, useState } from 'react';
-import { toast } from '../utils/toast'; // (আপনার toast ইউটিলিটি)
+import { toast } from '../utils/toast'; 
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import Spinner from '../components/Spinner'; // <-- লোডিং স্পিনার ইম্পোর্ট করুন
+import Spinner from '../components/Spinner'; 
 
 function Inner(){
   const [rows, setRows] = useState([]);
@@ -77,12 +15,12 @@ function Inner(){
   useEffect(()=> {
     (async()=> {
       try {
-        setLoading(true); // <-- লোডিং শুরু
+        setLoading(true); //  লোডিং শুরু
         setRows(await myContributions());
       } catch (err) {
         toast('error', err.message);
       } finally {
-        setLoading(false); // <-- লোডিং শেষ
+        setLoading(false); // লোডিং শেষ
       }
     })();
   },[]);
@@ -97,7 +35,7 @@ function Inner(){
     const head = [['Issue Title', 'Category', 'Paid Amount', 'Date']];
     const body = rows.map(r => [
       r.issueDetails?.title || r.issueId,
-      r.issueDetails?.category || 'N/A', // <-- PDF-এ ক্যাটাগরি যোগ করা হয়েছে
+      r.issueDetails?.category || 'N/A', 
       `৳ ${r.amount}`,
       new Date(r.date).toLocaleString()
     ]);
@@ -140,9 +78,9 @@ function Inner(){
 
             {rows.map(r=> (
               <tr key={r._id} className="border-t border-slate-200 dark:border-slate-800">
-                {/* সমাধান: সার্ভার থেকে আসা নতুন ডেটা এখানে দেখানো হচ্ছে */}
+                {/* সার্ভার থেকে আসা নতুন ডেটা এখানে দেখানো হচ্ছে */}
                 <td className="p-2">{r.issueDetails?.title || r.issueId}</td>
-                <td className="p-2">{r.issueDetails?.category || 'N/A'}</td> {/* <-- এই লাইনটি ড্যাশের বদলে বসবে */}
+                <td className="p-2">{r.issueDetails?.category || 'N/A'}</td> 
                 <td className="p-2">৳ {r.amount}</td>
                 <td className="p-2">{new Date(r.date).toLocaleString()}</td>
               </tr>
