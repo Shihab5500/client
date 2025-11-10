@@ -413,9 +413,9 @@ export default function Navbar() {
           </li>
         </ul>
         
-        {/* হ্যামবার্গার বাটন (শুধু ছোট স্ক্রিনে দেখাবে) */}
+        
         <div className="md:hidden flex items-center gap-2">
-          {/* <-- ৩. থিম টগল (মোবাইল) এখানেও যোগ করা যেতে পারে, অথবা মেনুতে --> */}
+          
           {/* <ThemeToggle /> */}
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
