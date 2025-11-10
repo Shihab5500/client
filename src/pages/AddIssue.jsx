@@ -152,10 +152,10 @@ import Spinner from '../components/Spinner';
 function AddIssueForm() {
   const { user, loading } = useAuth();
   
-  // react-hook-form-এর ডিফল্ট ভ্যালু সেট করা
+  
   const defaultValues = {
     status: 'ongoing',
-    category: 'Garbage', // <-- ড্রপডাউনের প্রথম অপশন
+    category: 'Garbage', 
     title: '',
     location: '',
     image: '',
@@ -180,10 +180,9 @@ function AddIssueForm() {
       await createIssue(payload);
       toast('success', 'Issue reported successfully!');
       
-      // ===== সমাধান: =====
-      // সফলভাবে সাবমিট হওয়ার পর, ফর্মটিকে ডিফল্ট ভ্যালুতে রিসেট করুন
+      
       reset(defaultValues); 
-      // ===================
+      
 
     } catch (e) {
       toast('error', e.message);
@@ -218,7 +217,7 @@ function AddIssueForm() {
           <input className="input" {...register('image', { required: true })} placeholder="https://" />
         </div>
         
-        {/* আপনার স্ক্রিনশট অনুযায়ী Description ফিল্ড */}
+       
         <div>
           <label className="label">Description</label>
           <textarea className="input" rows="4" {...register('description', { required: true })}></textarea>

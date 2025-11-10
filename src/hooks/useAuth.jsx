@@ -36,7 +36,7 @@ export function AuthProvider({ children }) {
       try {
         await setPersistence(auth, browserLocalPersistence);
       } catch (_) {
-        // no-op
+        
       }
 
       
