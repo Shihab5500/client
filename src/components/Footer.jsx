@@ -1,37 +1,3 @@
-// export default function Footer() {
-//   return (
-//     <footer className="mt-10 border-t border-slate-200 dark:border-slate-800">
-//       <div className="container mx-auto px-4 py-8 grid md:grid-cols-3 gap-6">
-//         <div>
-//           <div className="flex items-center gap-2 font-extrabold text-lg mb-2">
-//             <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-600 text-white">CC</span>
-//             Clean City
-//           </div>
-//           <p className="text-sm opacity-80">Report issues, rally neighbors, and keep your community clean and safe.</p>
-//         </div>
-//         <div>
-//           <h4 className="font-semibold mb-2">Useful Links</h4>
-//           <ul className="text-sm space-y-1">
-//             <li><a href="/issues">All Issues</a></li>
-//             <li><a href="/add-issue">Add Issue</a></li>
-//             <li><a href="/my-issues">My Issues</a></li>
-//             <li><a href="/my-contributions">My Contribution</a></li>
-//           </ul>
-//         </div>
-//         <div className="text-sm opacity-80">
-//           <p>© 2025 Clean City — All rights reserved.</p>
-//         </div>
-//       </div>
-//     </footer>
-//   );
-// }
-
-
-
-
-
-
-
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -129,7 +95,7 @@ export default function Footer() {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                // এখানে তোমার সাবমিট লজিক বসাতে পারো
+                
               }}
               className="flex items-center gap-2"
             >

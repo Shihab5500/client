@@ -125,8 +125,7 @@
 
 import { getAuth } from 'firebase/auth';
 
-// আপনার সার্ভারের বেস URL
-// const API_BASE_URL = 'http://127.0.0.1:5000';
+
 const API_BASE_URL = 'https://server-five-brown-34.vercel.app';
 
 // এই ফাংশনটি ফায়ারবেস থেকে বর্তমান ইউজারের টোকেন এনে দেয়
