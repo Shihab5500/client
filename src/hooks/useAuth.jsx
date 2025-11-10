@@ -79,10 +79,6 @@
 
 
 
-
-
-// src/context/AuthContext.jsx  (বা hooks/useAuth.jsx)
-
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import {
   onAuthStateChanged,
@@ -105,16 +101,16 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // একবারই provider বানাই (memo), যাতে popup/redirect ধারাবাহিক থাকে
+  
   const googleProvider = useMemo(() => {
     const p = new GoogleAuthProvider();
-    // অ্যাকাউন্ট পিকার ফোর্স করতে চাইলে
+    
     p.setCustomParameters({ prompt: "select_account" });
     return p;
   }, []);
 
   useEffect(() => {
-    // persistence আগে apply করা ভালো — তারপর auth state সাবস্ক্রাইব
+    
     (async () => {
       try {
         await setPersistence(auth, browserLocalPersistence);
