@@ -1,22 +1,4 @@
 
-
-
-
-// import { Link, NavLink, useNavigate } from 'react-router-dom';
-// import { useAuth } from '../hooks/useAuth';
-// import { toast } from '../utils/toast';
-// import { useState, useEffect, useRef } from 'react';
-
-// export default function Navbar() {
-//   const { user, logout } = useAuth();
-//   const navigate = useNavigate();
-//   const [open, setOpen] = useState(false);
-//   const menuRef = useRef();
-
-
-
-
-
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { toast } from '../utils/toast';
