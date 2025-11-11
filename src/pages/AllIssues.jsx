@@ -28,7 +28,7 @@ export default function AllIssues() {
         category: category,
         status: status,
         page: page,
-        limit: 12
+        limit: 50
       };
       
       const res = await getIssues(filters);
