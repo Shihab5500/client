@@ -1,42 +1,35 @@
+♻️ Clean City – Community Issue Reporting Platform
 
+This is a full-stack MERN (MongoDB, Express.js, React, Node.js) application that allows users to report, track, and manage environmental and cleanliness-related issues in their local areas, such as garbage problems, broken sidewalks, and illegal construction.
 
-# ♻️ ক্লিন সিটি (Clean City) - কমিউনিটি ইস্যু রিপোর্টিং পোর্টাল
+🔗 Live Links
 
-এটি একটি ফুল-স্ট্যাক MERN (MongoDB, Express.js, React, Node.js) অ্যাপ্লিকেশন, যা ব্যবহারকারীদের তাদের স্থানীয় এলাকার পরিবেশগত বা পরিচ্ছন্নতা-সম্পর্কিত সমস্যাগুলি (যেমন আবর্জনা, ভাঙা ফুটপাথ, অবৈধ নির্মাণ) রিপোর্ট করতে এবং ট্র্যাক করতে দেয়।
+Live Site: https://clean-city-world.netlify.app
 
+Server URL: https://server-five-brown-34.vercel.app
 
+💻 Source Code
 
-লাইভ লিংক ইউআরএল Live Site URL : https://clean-city-world.netlify.app
+GitHub Client: https://github.com/Shihab5500/client
 
-ক্লাইন্ট সাইট ইউআরএলঃ  https://server-five-brown-34.vercel.app
+GitHub Server: https://github.com/Shihab5500/server
 
+⭐ Key Features
 
-Github Client Link: https://github.com/Shihab5500/client
+Complete Authentication System:
+Implemented secure authentication using Firebase with Email/Password and Google login/registration. Private routes such as My Issues and Add Issue are fully protected.
 
-Github Server Link: https://github.com/Shihab5500/server
+Dynamic Issue Reporting:
+Users can post new cleanliness-related issues with images, location, and budget details. They can also update or delete their own issues from the My Issues page.
 
+Live Search and Filtering:
+The All Issues page supports live search by title, location, or description, along with filtering by category and issue status.
 
-## ⭐️ প্রধান বৈশিষ্ট্যসমূহ (Features)
+Contribution and Payment System:
+Users can financially contribute to any issue, and the list of contributors is displayed on the Issue Details page.
 
-*পূর্ণাঙ্গ অথেনটিকেশন: Firebase ব্যবহার করে ইমেইল/পাসওয়ার্ড এবং গুগল লগইন/রেজিস্ট্রেশন সিস্টেম। "My Issues", "Add Issue"-এর মতো প্রাইভেট রুটগুলো সুরক্ষিত করা আছে।
+PDF Report Download:
+Users can download a complete PDF report of their contribution history from the My Contribution page.
 
-*ডাইনামিক ইস্যু রিপোর্টিং: ব্যবহারকারীরা ছবি, লোকেশন ও বাজেট সহ নতুন পরিচ্ছন্নতার ইস্যু পোস্ট করতে পারেন। "My Issues" পেজ থেকে তারা নিজেদের পোস্ট আপডেট বা ডিলিট করতে পারেন।
-
-*লাইভ সার্চ ও ফিল্টারিং: "All Issues" পেজে টাইটেল, লোকেশন বা বর্ণনা অনুযায়ী লাইভ সার্চ করা যায় এবং ক্যাটাগরি বা স্ট্যাটাস অনুযায়ী ফিল্টার করার সুবিধা রয়েছে।
-
-*কন্ট্রিবিউশন ও পেমেন্ট: ব্যবহারকারীরা যেকোনো ইস্যুতে আর্থিকভাবে কন্ট্রিবিউট (Contribute) করতে পারেন এবং "Issue Details" পেজে কন্ট্রিবিউটরদের তালিকা দেখা যায়।
-
-*PDF রিপোর্ট ডাউনলোড: "My Contribution" পেজ থেকে ব্যবহারকারীরা তাদের নিজেদের কন্ট্রিবিউশনের একটি সম্পূর্ণ তালিকা PDF রিপোর্ট হিসেবে ডাউনলোড করতে পারেন।
-
-*সম্পূর্ণ রেসপন্সিভ ও ডার্ক মোড: পুরো ওয়েবসাইটটি মোবাইল এবং ডেক্সটপ ডিভাইসের জন্য রেসপন্সিভ এবং এতে ডার্ক/লাইট মোড টগল করার সুবিধা রয়েছে। <br><br><br>
-
-
-
-🚀 লোকাল রান গাইডলাইন (How to Run Locally
-
-Create a new folder on your system in the location where you want to store the project (e.g. My-Projects). Then open that folder in VS Code.
-Click Terminal in the menu bar at the top of VS Code and select New Terminal. You go to the Bash terminal and type npm run dev and click enter, then it will run.
-
-git clone YOUR_REPOSITORY_LINK
-cd YOUR_PROJECT_FOLDER_NAME
-npm run dev
+Fully Responsive with Dark Mode:
+The entire application is fully responsive for both mobile and desktop devices, with a dark/light mode toggle for better user experience.
