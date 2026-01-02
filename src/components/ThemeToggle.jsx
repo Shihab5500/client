@@ -36,13 +36,13 @@ export default function ThemeToggle() {
     // storage ইভেন্ট লিসেনার যোগ করা
     window.addEventListener('storage', handleStorageChange);
 
-    // কম্পোনেন্টটি আনমাউন্ট হলে লিসেনার রিমুভ করা
+    
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, []); //  মানে এটি শুধু একবারই রান হবে
+  }, []); 
 
-  // onClick ফাংশনটি state পরিবর্তন করে যা উপরের ১ নম্বর ইফেক্টটি চালু করে
+  
   return (
     <button 
       className="btn btn-outline w-full" 

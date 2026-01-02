@@ -12,7 +12,7 @@ const getAuthToken = async () => {
   return await user.getIdToken(true); 
 };
 
-// এটি প্রধান API কল করার ফাংশন
+
 const api = async (endpoint, options = {}) => {
   const token = await getAuthToken();
   
@@ -39,13 +39,13 @@ const api = async (endpoint, options = {}) => {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
 
-    // যদি সার্ভার 4xx বা 5xx এরর দেয়
+    
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || 'Something went wrong');
     }
 
-    // যদি রিকোয়েস্ট সফল হয় (যেমন DELETE রিকোয়েস্ট যার কোনো body নেই)
+    
     if (response.status === 204 || response.headers.get('content-length') === '0') {
       return null; // 
     }

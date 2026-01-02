@@ -1,4 +1,415 @@
 
+// import { Link, NavLink, useNavigate } from 'react-router-dom';
+// import { useAuth } from '../hooks/useAuth';
+// import { toast } from '../utils/toast';
+// import { useState, useEffect, useRef } from 'react';
+// import ThemeToggle from './ThemeToggle';
+
+// export default function Navbar() {
+//   const { user, logout } = useAuth();
+//   const navigate = useNavigate();
+  
+//   const [open, setOpen] = useState(false);
+//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+//   const menuRef = useRef();
+
+//   const handleLogout = async () => {
+//     setOpen(false);
+//     setIsMobileMenuOpen(false);
+    
+//     await logout();
+//     toast('success', 'Logged out');
+//     navigate('/');
+//   };
+
+//   useEffect(() => {
+//     const handleClickOutside = (e) => {
+//       if (menuRef.current && !menuRef.current.contains(e.target)) {
+//         setOpen(false);
+//       }
+//     };
+//     document.addEventListener('mousedown', handleClickOutside);
+//     return () => document.removeEventListener('mousedown', handleClickOutside);
+//   }, []);
+
+//   // হেল্পার ফাংশন: অ্যাক্টিভ লিংকের স্টাইল
+//   const getLinkClass = ({ isActive }) => 
+//     isActive ? 'text-emerald-600 font-semibold' : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600';
+
+//   // হেল্পার ফাংশন: মোবাইল মেনুর অ্যাক্টিভ স্টাইল
+//   const getMobileLinkClass = ({ isActive }) =>
+//     isActive 
+//       ? 'block w-full px-4 py-2 rounded bg-emerald-50 text-emerald-700 font-semibold'
+//       : 'block w-full px-4 py-2 rounded text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800';
+
+
+//   return (
+//     <header className="border-b border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-950/60 backdrop-blur sticky top-0 z-30">
+//       <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
+        
+//         {/* লোগো */}
+//         <Link to="/" className="flex items-center gap-2 font-extrabold text-xl">
+//           <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-600 text-white">CC</span>
+//           Clean City
+//         </Link>
+
+//         {/* ডেক্সটপ মেনু (বড় স্ক্রিনে দেখাবে) */}
+//         <ul className="hidden md:flex items-center gap-4 text-sm">
+//           <li>
+//             <NavLink to="/" className={getLinkClass}>
+//               Home
+//             </NavLink>
+//           </li>
+
+//           {!user && (
+//             <>
+//               <li><NavLink to="/issues" className={getLinkClass}>Issues</NavLink></li>
+//               <li><NavLink to="/login" className={getLinkClass}>Login</NavLink></li>
+//               <li><NavLink to="/register" className={getLinkClass}>Register</NavLink></li>
+//             </>
+//           )}
+
+//           {user && (
+//             <>
+//               <li><NavLink to="/issues" className={getLinkClass}>All Issues</NavLink></li>
+//               <li><NavLink to="/add-issue" className={getLinkClass}>Add Issues</NavLink></li>
+//               <li><NavLink to="/my-issues" className={getLinkClass}>My Issues</NavLink></li>
+//               <li><NavLink to="/my-contributions" className={getLinkClass}>My Contribution</NavLink></li>
+
+//               {/* প্রোফাইল ড্রপডাউন */}
+//               <li className="relative" ref={menuRef}>
+//                 <img
+//                   src={user.photoURL || `https://i.pravatar.cc/40?u=${user.email}`}
+//                   alt="avatar"
+//                   className="h-8 w-8 rounded-full border cursor-pointer"
+//                   onClick={() => setOpen(!open)}
+//                 />
+//                 {open && (
+//                   <div className="absolute right-0 mt-2">
+//                     <div className="card min-w-[160px] shadow-lg">
+//                       <Link
+//                         to="/profile"
+//                         onClick={() => setOpen(false)}
+//                         className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800"
+//                       >
+//                         Profile
+//                       </Link>
+//                       <button
+//                         onClick={handleLogout}
+//                         className="btn btn-outline w-full mt-2"
+//                       >
+//                         Logout
+//                       </button>
+//                     </div>
+//                   </div>
+//                 )}
+//               </li>
+//             </>
+//           )}
+
+//           {/* <-- ২. থিম টগল (ডেক্সটপ) যোগ করা হয়েছে --> */}
+//           <li className="ml-2">
+//             <ThemeToggle />
+//           </li>
+//         </ul>
+        
+        
+//         <div className="md:hidden flex items-center gap-2">
+          
+//           {/* <ThemeToggle /> */}
+//           <button 
+//             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+//             className="text-slate-700 dark:text-slate-200 hover:text-emerald-600"
+//           >
+//             {isMobileMenuOpen ? (
+//               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+//                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+//               </svg>
+//             ) : (
+//               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+//                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+//               </svg>
+//             )}
+//           </button>
+//         </div>
+//       </nav>
+
+//       {/* মোবাইল মেনু ড্রপডাউন */}
+//       <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
+//         <ul className="flex flex-col gap-1 text-sm p-4 border-t border-slate-200 dark:border-slate-800">
+//           <li>
+//             <NavLink to="/" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>
+//               Home
+//             </NavLink>
+//           </li>
+
+//           {!user && (
+//             <>
+//               <li><NavLink to="/issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Issues</NavLink></li>
+//               <li><NavLink to="/login" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Login</NavLink></li>
+//               <li><NavLink to="/register" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Register</NavLink></li>
+//             </>
+//           )}
+
+//           {user && (
+//             <>
+//               <li><NavLink to="/issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>All Issues</NavLink></li>
+//               <li><NavLink to="/add-issue" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Add Issues</NavLink></li>
+//               <li><NavLink to="/my-issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>My Issues</NavLink></li>
+//               <li><NavLink to="/my-contributions" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>My Contribution</NavLink></li>
+              
+//               <li className="border-t border-slate-200 dark:border-slate-800 pt-2 mt-2">
+//                 <NavLink 
+//                   to="/profile" 
+//                   className={getMobileLinkClass} 
+//                   onClick={() => setIsMobileMenuOpen(false)}
+//                 >
+//                   <div className="flex items-center gap-2">
+//                     <img
+//                       src={user.photoURL || `https://i.pravatar.cc/40?u=${user.email}`}
+//                       alt="avatar"
+//                       className="h-7 w-7 rounded-full border"
+//                     />
+//                     <span>Profile</span>
+//                   </div>
+//                 </NavLink>
+//               </li>
+//               <li>
+//                 <button
+//                   onClick={handleLogout}
+//                   className="btn btn-outline w-full mt-2"
+//                 >
+//                   Logout
+//                 </button>
+//               </li>
+//             </>
+//           )}
+
+//           {/* <-- ৩. থিম টগল (মোবাইল) যোগ করা হয়েছে --> */}
+//           <li className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+//             <div className="w-full">
+//               <ThemeToggle />
+//             </div>
+//           </li>
+//         </ul>
+//       </div>
+//     </header>
+//   );
+// }
+
+
+// import { Link, NavLink, useNavigate } from 'react-router-dom';
+// import { useAuth } from '../hooks/useAuth';
+// import { toast } from '../utils/toast';
+// import { useState, useEffect, useRef } from 'react';
+// import ThemeToggle from './ThemeToggle';
+
+// export default function Navbar() {
+//   const { user, logout } = useAuth();
+//   const navigate = useNavigate();
+  
+//   const [open, setOpen] = useState(false);
+//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+//   const menuRef = useRef();
+
+//   const handleLogout = async () => {
+//     setOpen(false);
+//     setIsMobileMenuOpen(false);
+    
+//     await logout();
+//     toast('success', 'Logged out');
+//     navigate('/');
+//   };
+
+//   useEffect(() => {
+//     const handleClickOutside = (e) => {
+//       if (menuRef.current && !menuRef.current.contains(e.target)) {
+//         setOpen(false);
+//       }
+//     };
+//     document.addEventListener('mousedown', handleClickOutside);
+//     return () => document.removeEventListener('mousedown', handleClickOutside);
+//   }, []);
+
+//   // হেল্পার ফাংশন: অ্যাক্টিভ লিংকের স্টাইল
+//   const getLinkClass = ({ isActive }) => 
+//     isActive ? 'text-emerald-600 font-semibold' : 'text-slate-600 dark:text-slate-300 hover:text-emerald-600';
+
+//   // হেল্পার ফাংশন: মোবাইল মেনুর অ্যাক্টিভ স্টাইল
+//   const getMobileLinkClass = ({ isActive }) =>
+//     isActive 
+//       ? 'block w-full px-4 py-2 rounded bg-emerald-50 text-emerald-700 font-semibold'
+//       : 'block w-full px-4 py-2 rounded text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800';
+
+
+//   return (
+//     <header className="border-b border-slate-200 dark:border-slate-800 bg-white/60 dark:bg-slate-950/60 backdrop-blur sticky top-0 z-30">
+//       <nav className="container mx-auto px-4 py-3 flex items-center justify-between">
+        
+//         {/* লোগো */}
+//         <Link to="/" className="flex items-center gap-2 font-extrabold text-xl">
+//           <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-emerald-600 text-white">CC</span>
+//           Clean City
+//         </Link>
+
+//         {/* ডেক্সটপ মেনু (বড় স্ক্রিনে দেখাবে) */}
+//         <ul className="hidden md:flex items-center gap-4 text-sm">
+//           <li>
+//             <NavLink to="/" className={getLinkClass}>
+//               Home
+//             </NavLink>
+//           </li>
+
+//           {!user && (
+//             <>
+//               <li><NavLink to="/issues" className={getLinkClass}>Issues</NavLink></li>
+//               <li><NavLink to="/about">About</NavLink></li>  {/* নতুন */}
+//               <li><NavLink to="/contact">Contact</NavLink></li> {/* নতুন */}
+//               <li><NavLink to="/login" className={getLinkClass}>Login</NavLink></li>
+//               <li><NavLink to="/register" className={getLinkClass}>Register</NavLink></li>
+              
+//             </>
+//           )}
+
+//           {user && (
+//             <>
+//               <li><NavLink to="/issues" className={getLinkClass}>All Issues</NavLink></li>
+              
+//               {/* <--- নতুন Dashboard বাটন যোগ করা হয়েছে ---> */}
+//               <li>
+//                 <NavLink to="/dashboard" className="btn btn-sm btn-primary text-white ml-2 rounded-lg font-medium shadow-none">
+//                   Dashboard
+//                 </NavLink>
+//               </li>
+
+//               {/* প্রোফাইল ড্রপডাউন */}
+//               <li className="relative" ref={menuRef}>
+//                 <img
+//                   src={user.photoURL || `https://i.pravatar.cc/40?u=${user.email}`}
+//                   alt="avatar"
+//                   className="h-8 w-8 rounded-full border cursor-pointer"
+//                   onClick={() => setOpen(!open)}
+//                 />
+//                 {open && (
+//                   <div className="absolute right-0 mt-2 z-50">
+//                     <div className="card min-w-[160px] shadow-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+//                       <Link
+//                         to="/dashboard/profile" // <-- প্রোফাইল লিংক আপডেট করা হয়েছে
+//                         onClick={() => setOpen(false)}
+//                         className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800"
+//                       >
+//                         Profile
+//                       </Link>
+//                       <button
+//                         onClick={handleLogout}
+//                         className="btn btn-outline btn-sm w-full mt-2"
+//                       >
+//                         Logout
+//                       </button>
+//                     </div>
+//                   </div>
+//                 )}
+//               </li>
+//             </>
+//           )}
+
+//           {/* থিম টগল (ডেক্সটপ) */}
+//           <li className="ml-2">
+//             <ThemeToggle />
+//           </li>
+//         </ul>
+        
+//         {/* মোবাইল মেনু বাটন */}
+//         <div className="md:hidden flex items-center gap-2">
+//           <button 
+//             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+//             className="text-slate-700 dark:text-slate-200 hover:text-emerald-600"
+//           >
+//             {isMobileMenuOpen ? (
+//               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+//                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+//               </svg>
+//             ) : (
+//               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+//                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+//               </svg>
+//             )}
+//           </button>
+//         </div>
+//       </nav>
+
+//       {/* মোবাইল মেনু ড্রপডাউন */}
+//       <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
+//         <ul className="flex flex-col gap-1 text-sm p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+//           <li>
+//             <NavLink to="/" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>
+//               Home
+//             </NavLink>
+//           </li>
+
+//           {!user && (
+//             <>
+//               <li><NavLink to="/issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Issues</NavLink></li>              
+//               <li><NavLink to="/about" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>About</NavLink></li>              
+//               <li><NavLink to="/contact" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Contact</NavLink></li>              
+//               <li><NavLink to="/login" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Login</NavLink></li>
+//               <li><NavLink to="/register" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Register</NavLink></li>
+//             </>
+//           )}
+
+//           {user && (
+//             <>
+//               <li><NavLink to="/issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>All Issues</NavLink></li>
+              
+//               {/* <--- মোবাইলের জন্য Dashboard লিংক ---> */}
+//               <li>
+//                 <NavLink to="/dashboard" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>
+//                   Dashboard
+//                 </NavLink>
+//               </li>
+              
+//               <li className="border-t border-slate-200 dark:border-slate-800 pt-2 mt-2">
+//                 <NavLink 
+//                   to="/dashboard/profile" // <-- প্রোফাইল লিংক আপডেট করা হয়েছে
+//                   className={getMobileLinkClass} 
+//                   onClick={() => setIsMobileMenuOpen(false)}
+//                 >
+//                   <div className="flex items-center gap-2">
+//                     <img
+//                       src={user.photoURL || `https://i.pravatar.cc/40?u=${user.email}`}
+//                       alt="avatar"
+//                       className="h-7 w-7 rounded-full border"
+//                     />
+//                     <span>Profile</span>
+//                   </div>
+//                 </NavLink>
+//               </li>
+//               <li>
+//                 <button
+//                   onClick={handleLogout}
+//                   className="btn btn-outline w-full mt-2"
+//                 >
+//                   Logout
+//                 </button>
+//               </li>
+//             </>
+//           )}
+
+//           {/* থিম টগল (মোবাইল) */}
+//           <li className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">
+//             <div className="w-full">
+//               <ThemeToggle />
+//             </div>
+//           </li>
+//         </ul>
+//       </div>
+//     </header>
+//   ); 
+// }
+
+
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { toast } from '../utils/toast';
@@ -54,17 +465,31 @@ export default function Navbar() {
           Clean City
         </Link>
 
-        {/* ডেক্সটপ মেনু (বড় স্ক্রিনে দেখাবে) */}
+        {/* ডেক্সটপ মেনু (বড় স্ক্রিনে দেখাবে) */}
         <ul className="hidden md:flex items-center gap-4 text-sm">
+          {/* ১. Home */}
           <li>
             <NavLink to="/" className={getLinkClass}>
               Home
             </NavLink>
           </li>
 
+          {/* ২. All Issues (লগইন থাকলে 'All Issues', না থাকলে 'Issues') */}
+          <li>
+            <NavLink to="/issues" className={getLinkClass}>
+              {user ? 'All Issues' : 'Issues'}
+            </NavLink>
+          </li>
+          
+          {/* ৩. Contact */}
+          <li><NavLink to="/contact" className={getLinkClass}>Contact</NavLink></li>
+
+          {/* ৪. About */}
+          <li><NavLink to="/about" className={getLinkClass}>About</NavLink></li>
+
+          {/* বাকি অপশন (Login/Dashboard) */}
           {!user && (
             <>
-              <li><NavLink to="/issues" className={getLinkClass}>Issues</NavLink></li>
               <li><NavLink to="/login" className={getLinkClass}>Login</NavLink></li>
               <li><NavLink to="/register" className={getLinkClass}>Register</NavLink></li>
             </>
@@ -72,10 +497,12 @@ export default function Navbar() {
 
           {user && (
             <>
-              <li><NavLink to="/issues" className={getLinkClass}>All Issues</NavLink></li>
-              <li><NavLink to="/add-issue" className={getLinkClass}>Add Issues</NavLink></li>
-              <li><NavLink to="/my-issues" className={getLinkClass}>My Issues</NavLink></li>
-              <li><NavLink to="/my-contributions" className={getLinkClass}>My Contribution</NavLink></li>
+              {/* <--- Dashboard বাটন ---> */}
+              <li>
+                <NavLink to="/dashboard" className="btn btn-sm btn-primary text-white ml-2 rounded-lg font-medium shadow-none">
+                  Dashboard
+                </NavLink>
+              </li>
 
               {/* প্রোফাইল ড্রপডাউন */}
               <li className="relative" ref={menuRef}>
@@ -86,10 +513,10 @@ export default function Navbar() {
                   onClick={() => setOpen(!open)}
                 />
                 {open && (
-                  <div className="absolute right-0 mt-2">
-                    <div className="card min-w-[160px] shadow-lg">
+                  <div className="absolute right-0 mt-2 z-50">
+                    <div className="card min-w-[160px] shadow-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                       <Link
-                        to="/profile"
+                        to="/dashboard/profile"
                         onClick={() => setOpen(false)}
                         className="block px-3 py-2 rounded hover:bg-gray-100 dark:hover:bg-slate-800"
                       >
@@ -97,7 +524,7 @@ export default function Navbar() {
                       </Link>
                       <button
                         onClick={handleLogout}
-                        className="btn btn-outline w-full mt-2"
+                        className="btn btn-outline btn-sm w-full mt-2"
                       >
                         Logout
                       </button>
@@ -108,16 +535,14 @@ export default function Navbar() {
             </>
           )}
 
-          {/* <-- ২. থিম টগল (ডেক্সটপ) যোগ করা হয়েছে --> */}
+          {/* থিম টগল (ডেক্সটপ) */}
           <li className="ml-2">
             <ThemeToggle />
           </li>
         </ul>
         
-        
+        {/* মোবাইল মেনু বাটন */}
         <div className="md:hidden flex items-center gap-2">
-          
-          {/* <ThemeToggle /> */}
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="text-slate-700 dark:text-slate-200 hover:text-emerald-600"
@@ -137,16 +562,29 @@ export default function Navbar() {
 
       {/* মোবাইল মেনু ড্রপডাউন */}
       <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
-        <ul className="flex flex-col gap-1 text-sm p-4 border-t border-slate-200 dark:border-slate-800">
+        <ul className="flex flex-col gap-1 text-sm p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+          {/* ১. Home */}
           <li>
             <NavLink to="/" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>
               Home
             </NavLink>
           </li>
 
+          {/* ২. All Issues */}
+          <li>
+            <NavLink to="/issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>
+               {user ? 'All Issues' : 'Issues'}
+            </NavLink>
+          </li>
+          
+          {/* ৩. Contact */}
+          <li><NavLink to="/contact" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Contact</NavLink></li>
+
+          {/* ৪. About */}
+          <li><NavLink to="/about" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>About</NavLink></li>
+
           {!user && (
             <>
-              <li><NavLink to="/issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Issues</NavLink></li>
               <li><NavLink to="/login" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Login</NavLink></li>
               <li><NavLink to="/register" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Register</NavLink></li>
             </>
@@ -154,14 +592,16 @@ export default function Navbar() {
 
           {user && (
             <>
-              <li><NavLink to="/issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>All Issues</NavLink></li>
-              <li><NavLink to="/add-issue" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>Add Issues</NavLink></li>
-              <li><NavLink to="/my-issues" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>My Issues</NavLink></li>
-              <li><NavLink to="/my-contributions" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>My Contribution</NavLink></li>
+              {/* <--- মোবাইলের জন্য Dashboard লিংক ---> */}
+              <li>
+                <NavLink to="/dashboard" className={getMobileLinkClass} onClick={() => setIsMobileMenuOpen(false)}>
+                  Dashboard
+                </NavLink>
+              </li>
               
               <li className="border-t border-slate-200 dark:border-slate-800 pt-2 mt-2">
                 <NavLink 
-                  to="/profile" 
+                  to="/dashboard/profile"
                   className={getMobileLinkClass} 
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -186,7 +626,7 @@ export default function Navbar() {
             </>
           )}
 
-          {/* <-- ৩. থিম টগল (মোবাইল) যোগ করা হয়েছে --> */}
+          {/* থিম টগল (মোবাইল) */}
           <li className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800">
             <div className="w-full">
               <ThemeToggle />

@@ -22,8 +22,8 @@ export default function Register(){
 
   return (
     <div className="max-w-md mx-auto card">
-      <Helmet><title>Register — Clean City</title></Helmet>
-      <h2 className="text-xl font-bold mb-3">Register</h2>
+      <Helmet><title>Create account — Clean City</title></Helmet>
+      <h2 className="text-xl font-bold mb-3">Create account</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
         <div><label className="label">Name</label><input className="input" {...register('name',{required:true})} /></div>
         <div><label className="label">Email</label><input className="input" type="email" {...register('email',{required:true})} /></div>
